@@ -18,13 +18,17 @@
         <div>
             <h1>Welcome to Nabnak! The future of Virtual Kanban Boards!!!</h1>
             <hr />
-            <p>
+            <p id="story">
                 Nabnak is all about the future of Kanban boards with the ability to go ahead register as a user and make as many cards as
                 the heart desires making for a very simple experience for the user. It leverages a Spring Boot API backend that handles all
                 HTTP request and response using RESTful web architecture. This is a bright future for kanban boards!
             </p>
             <br />
-            <a href="src/components/register/register.html"><button>Sign up Today!!</button></a>
+            <button onclick="signUp()">Sign up Today!!</button>
+            <button onclick="trueStory()">Find out the Truth</button>
+            <button onclick="options()">What options do you have?</button>
+            <div id="options"></div>
         </div>
+        <script src="index.js"></script>
     </body>
 </html>
