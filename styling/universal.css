@@ -1,0 +1,17 @@
+body {
+    color: rgb(220, 57, 76);
+    background-color: rgb(29, 28, 28);
+    font-size: 32px;
+}
+
+nav {
+    font-size: 42px;
+    border: 2px solid black;
+    padding: 8px;
+}
+
+.navButton {
+    padding: 2px;
+    border: 3px solid red;
+    color: red;
+}
