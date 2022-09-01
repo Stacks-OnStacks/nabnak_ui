@@ -8,14 +8,16 @@
         <link rel="stylesheet" href="styling/universal.css" />
     </head>
     <body>
+        <h1>YOOOOOOOOOOOOOOOOOOOOOOO</h1>
         <nav>
             <a class="navButton" href="src/components/login/login.html">Login</a>
-            <a class="navButton" href="src/components/register/register.html">Register</a>
+            <button class="navButton" onclick="registerRender()">Register</button>
             <a class="navButton" href="src/components/member/member.html">Member</a>
-            <a class="navButton" href="src/components/card/card.html">Card</a>
+            <a class="navButton">Card</a>
+            <button class="navButton" onclick="render()">Change front page</button>
         </nav>
 
-        <div>
+        <div id="content">
             <h1>Welcome to Nabnak! The future of Virtual Kanban Boards!!!</h1>
             <hr />
             <p id="story">
@@ -30,5 +32,7 @@
             <div id="options"></div>
         </div>
         <script src="index.js"></script>
+        <script src="src/components/newFrontpage/newfrontpage.js"></script>
+        <script src="src/components/register/register.js"></script>
     </body>
 </html>

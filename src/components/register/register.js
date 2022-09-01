@@ -21,3 +21,17 @@ function register() {
 
     console.log(JSON.stringify(newMember));
 }
+
+function registerRender() {
+    document.getElementById("content").innerHTML = `
+<label>Email:</label>
+<input class="registration" placeholder="i.e Jester@mail.com" />
+<label>Full Name:</label>
+<input class="registration" placeholder="i.e Charles Jester" />
+<label>Password:</label>
+<input class="registration" placeholder="i.e charlesIsCool1!" />
+<label>Experience in Months:</label>
+<input class="registration" placeholder="Enter 0-100" />
+<button onclick="register()">Register</button>
+<p id="invalid"></p>`;
+}
