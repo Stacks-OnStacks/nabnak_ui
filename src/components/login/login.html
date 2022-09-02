@@ -7,17 +7,17 @@
         <title>Document</title>
         <link rel="stylesheet" href="../../../styling/universal.css" />
     </head>
-    <body>
-        <nav>
-            <a class="navButton" href="../../../index.html">Home</a>
-            <a class="navButton" href="../register/register.html">Register</a>
-            <a class="navButton" href="../member/member.html">Member</a>
-            <a class="navButton" href="../card/card.html">Card</a>
-        </nav>
+    <body onload="navRender()">
+        <div id="nav"></div>
 
         <label>Email:</label>
-        <input placeholder="i.e Jester@mail.com" />
+        <input id="loginEmail" placeholder="i.e Jester@mail.com" />
         <label>Password:</label>
-        <input placeholder="i.e Jester@mail.com" />
+        <input id="loginPassword" type="password" placeholder="i.e charlesIsCool!" />
+        <button onclick="login()">Login</button>
+
+        <script src="../../../index.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="login.js"></script>
     </body>
 </html>

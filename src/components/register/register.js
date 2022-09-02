@@ -19,10 +19,12 @@ function register() {
         experienceMonths: experienceMonths.value,
     };
 
+    // TODO IMPLEMENT API CALL
     console.log(JSON.stringify(newMember));
 }
 
 function registerRender() {
+    location.hash = "register";
     document.getElementById("content").innerHTML = `
 <label>Email:</label>
 <input class="registration" placeholder="i.e Jester@mail.com" />

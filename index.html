@@ -7,32 +7,19 @@
         <title>Document</title>
         <link rel="stylesheet" href="styling/universal.css" />
     </head>
-    <body>
-        <h1>YOOOOOOOOOOOOOOOOOOOOOOO</h1>
-        <nav>
-            <a class="navButton" href="src/components/login/login.html">Login</a>
-            <button class="navButton" onclick="registerRender()">Register</button>
-            <a class="navButton" href="src/components/member/member.html">Member</a>
-            <a class="navButton">Card</a>
-            <button class="navButton" onclick="render()">Change front page</button>
-        </nav>
-
-        <div id="content">
-            <h1>Welcome to Nabnak! The future of Virtual Kanban Boards!!!</h1>
-            <hr />
-            <p id="story">
-                Nabnak is all about the future of Kanban boards with the ability to go ahead register as a user and make as many cards as
-                the heart desires making for a very simple experience for the user. It leverages a Spring Boot API backend that handles all
-                HTTP request and response using RESTful web architecture. This is a bright future for kanban boards!
-            </p>
-            <br />
-            <button onclick="signUp()">Sign up Today!!</button>
-            <button onclick="trueStory()">Find out the Truth</button>
-            <button onclick="options()">What options do you have?</button>
-            <div id="options"></div>
-        </div>
+    <body onload="homeMessage()">
         <script src="index.js"></script>
         <script src="src/components/newFrontpage/newfrontpage.js"></script>
         <script src="src/components/register/register.js"></script>
+        <nav>
+            <button class="navButton" onclick="window.location.reload()">Home</button>
+            <a href="src/components/login/login.html"><button class="navButton">Login</button></a>
+            <button class="navButton" onclick="registerRender()">Register</button>
+            <a href="src/components/member/member.html"><button class="navButton">Member</button></a>
+            <a href="src/components/card/card.html"><button class="navButton">Card</button></a>
+            <button class="navButton" onclick="render()">Change front page</button>
+        </nav>
+
+        <div id="content"></div>
     </body>
 </html>

@@ -1,3 +1,4 @@
+// CHANGE HARD CODED TO API CALL - findById
 const testingMember = {
     memberId: "b6dca03f-6090-4930-9a74-dffbb7b9ab38",
     fullName: "Data Beaver",
@@ -33,6 +34,7 @@ function showMultiTest() {
     document.getElementById("memberTable").innerHTML = html_code;
 }
 
+// CHANGE HARD CODED TO API CALL
 const testingMembers = [
     {
         memberId: "8048d36c-0db5-49eb-b097-307b23d3650f",
