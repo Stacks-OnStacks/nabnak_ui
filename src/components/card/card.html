@@ -30,19 +30,29 @@
                 <label>Status:</label>
                 <input type="radio" id="statusRadio1" name="status" value="OPEN" onchange="statusValue()" />
                 <label for="statusRadio1">Open</label>
-                <input type="radio" id="statusRadio2" name="status" value="IN-PROGRESS" onchange="statusValue()" />
+                <input type="radio" id="statusRadio2" name="status" value="INPROGRESS" onchange="statusValue()" />
                 <label for="statusRadio2">In-Progress</label>
-                <input type="radio" id="statusRadio3" name="status" value="COMPLETED" onchange="statusValue()" />
-                <label for="statusRadio3">Completed</label>
+                <input type="radio" id="statusRadio3" name="status" value="CLOSED" onchange="statusValue()" />
+                <label for="statusRadio3">Closed</label>
             </div>
             <input type="hidden" id="techSelect" class="card" value=""></input>
             <input type="hidden" id="statusSelect" class="card" value=""></input>
 
             <button onclick="newCard()">Create Card</button>
+            <p id="cardResponse"></p>
         </div>
 
         <div id="cardTable"></div>
         <script src="card.js"></script>
         <script src="../../../index.js"></script>
+        <script>
+            const token = window.localStorage.getItem("token")
+            console.log(token)
+            if(token){ // because this is null it can be be used for it's "falsy" value
+                console.log("If statement running")
+                window.location.replace("../login/login.html")
+                alert("You must log in to access this page")
+            }
+        </script>
     </body>
 </html>
