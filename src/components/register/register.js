@@ -1,39 +1,61 @@
-function register() {
-    let [email, fullName, password, experienceMonths] = document.getElementsByClassName("registration");
-    console.log(email.value, fullName.value, password.value, experienceMonths.value);
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import { nabnakClient } from "../../common/remote/nabnak-client";
 
-    if (email.value === "" || fullName.value === "" || password.value === "") {
-        document.getElementById(
-            "invalid"
-        ).innerHTML = `One of the followin was not entered Email: ${email.value} FullName: ${fullName.value} Password: ${password.value}`;
-        return;
+export default function Register() {
+    const navigate = useNavigate();
+    const [wasPersisted, setWasPersisted] = useState();
+    const [formData, setFormData] = useState({
+        email: "",
+        fullName: "",
+        password: "",
+        experienceMonths: "",
+    });
+
+    async function register(e) {
+        e.preventDefault();
+        try {
+            await nabnakClient.post("/member", formData);
+            setWasPersisted(`User successfully registered nagivating to login...`);
+            // setTimeout requires anonmyous function to call other functions/satements and then time in milliseconds
+            setTimeout(() => navigate("/login"), 5000);
+        } catch (error) {
+            if (error.response.status === 400) {
+                setWasPersisted(`The following issues occured: ${error.response.data}`);
+            }
+        }
     }
-    if (experienceMonths.value === "" || experienceMonths.value < 0 || experienceMonths.value > 100) {
-        document.getElementById("invalid").innerHTML = `Please enter a range of 0-100, you ented ${experienceMonths.value}`;
-        return;
-    }
-    const newMember = {
-        email: email.value,
-        fullName: fullName.value,
-        password: password.value,
-        experienceMonths: experienceMonths.value,
-    };
 
-    // TODO IMPLEMENT API CALL
-    console.log(JSON.stringify(newMember));
-}
-
-function registerRender() {
-    location.hash = "register";
-    document.getElementById("content").innerHTML = `
-<label>Email:</label>
-<input class="registration" placeholder="i.e Jester@mail.com" />
-<label>Full Name:</label>
-<input class="registration" placeholder="i.e Charles Jester" />
-<label>Password:</label>
-<input class="registration" placeholder="i.e charlesIsCool1!" />
-<label>Experience in Months:</label>
-<input class="registration" placeholder="Enter 0-100" />
-<button onclick="register()">Register</button>
-<p id="invalid"></p>`;
+    return (
+        <>
+            <form>
+                <label>Email:</label>
+                <input
+                    class="registration"
+                    placeholder="i.e Jester@mail.com"
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                />
+                <label>Full Name:</label>
+                <input
+                    class="registration"
+                    placeholder="i.e Charles Jester"
+                    onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                />
+                <label>Password:</label>
+                <input
+                    class="registration"
+                    placeholder="i.e charlesIsCool1!"
+                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                />
+                <label>Experience in Months:</label>
+                <input
+                    class="registration"
+                    placeholder="Enter 0-100"
+                    onChange={(e) => setFormData({ ...formData, experienceMonths: e.target.value })}
+                />
+                <button onClick={register}>Register</button>
+            </form>
+            {wasPersisted === undefined ? <p></p> : <p>{wasPersisted}</p>}
+        </>
+    );
 }

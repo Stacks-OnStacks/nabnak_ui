@@ -1,32 +1,47 @@
-const url = "http://localhost:8080";
+import axios from "axios";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router";
+import { nabnakClient } from "../../common/remote/nabnak-client";
 
-async function login() {
-    const email = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
+export default function Login() {
+    // Define state & hooks at the beginning
+    const navigate = useNavigate();
+    const emailInput = useRef();
+    const passwordInput = useRef();
 
-    // TODO: FINISH LOGIN CALL TO API
-    const body = JSON.stringify({ email: email, password: password });
+    const [loginStatus, setLoginStatus] = useState(); // use state default value is undefined
 
-    try {
-        const response = await fetch(`${url}/auth`, {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json",
-            },
-            body: body,
-        });
-        console.log(response);
-        if (response.status === 404) {
-            document.getElementById("failedLogIn").innerHTML = "Information provided was incorrect, please try again.";
-        } else {
-            document.getElementById("failedLogIn").innerHTML = "Successfully Logged In";
+    // define functions
+    async function login() {
+        const body = { email: emailInput.current.value, password: passwordInput.current.value };
+
+        try {
+            const response = await nabnakClient.post("/auth", body);
+
+            // Fetch LOWERCASES all Header Keys
+            console.log(response.data);
+            setLoginStatus(undefined);
+
+            window.localStorage.setItem("token", response.headers.authorization);
+            navigate("/card");
+        } catch (error) {
+            console.log(error.response.data);
+            if (error.response.status === 404) {
+                let loginFailed = `Email or Password was incorrect for email: ${body.email}`;
+                setLoginStatus(loginFailed);
+            }
         }
-
-        // Fetch LOWERCASES all Header Keys
-        console.log(response.headers.get("authorization"));
-
-        window.localStorage.setItem("token", response.headers.get("authorization"));
-    } catch (error) {
-        console.log(error);
     }
+
+    // Return
+    return (
+        <>
+            <label>Email:</label>
+            <input id="loginEmail" placeholder="i.e Jester@mail.com" ref={emailInput} />
+            <label>Password:</label>
+            <input id="loginPassword" type="password" placeholder="i.e charlesIsCool!" ref={passwordInput} />
+            <button onClick={login}>Login</button>
+            {loginStatus === undefined ? <p></p> : <p>{loginStatus}</p>}
+        </>
+    );
 }
