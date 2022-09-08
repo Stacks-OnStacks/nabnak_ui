@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { addCardStore } from "./cardSlice";
+import { addCardStore } from "./cardPoolSlice";
 
 export default function AddCardToPool(props) {
     const card = props.card;

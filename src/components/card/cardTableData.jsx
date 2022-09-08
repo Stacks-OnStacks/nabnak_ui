@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useSelector } from "react-redux";
-import AddCardToPool from "./addCardToPool";
+import AddCardToPool from "../dashboard/addCardToPool";
 import { cardContext } from "./cardTable";
 import DeleteCard from "./deleteCard";
 

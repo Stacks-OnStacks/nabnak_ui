@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import DeleteCardFromPool from "./deleteCardFromPool";
 
 export default function CardPoolTableData(props) {
     const email = useSelector((state) => state.loginSlice.email);
@@ -10,6 +11,7 @@ export default function CardPoolTableData(props) {
                 <td>{o.tech}</td>
                 <td>{o.status}</td>
                 <td>{email}</td>
+                <DeleteCardFromPool id={i} />
             </tr>
         );
     });

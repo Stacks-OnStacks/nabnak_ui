@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import CardPoolTableData from "./cardPoolTableData";
 
 export default function CardPoolTable() {
-    const { cards, cardNumber } = useSelector((state) => state.cardSlice);
+    const { cards, cardNumber } = useSelector((state) => state.cardPoolSlice);
 
     return (
         <div>

@@ -4,12 +4,12 @@ import AuthCheck from "../../common/authCheck/authCheck";
 import addAuthToken from "../../common/remote/addAuthHeader";
 import { nabnakClient } from "../../common/remote/nabnak-client";
 import AddCardToPool from "./addCardToPool";
-import { sendCards } from "./cardSlice";
+import { sendCards } from "./cardPoolSlice";
 
 export default function CreateCardPool() {
     AuthCheck(false);
 
-    const cards = useSelector((state) => state.cardSlice.cards);
+    const cards = useSelector((state) => state.cardPoolSlice.cards);
 
     const [formData, setFormData] = useState({
         description: "",

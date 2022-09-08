@@ -1,13 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import addAuthToken from "../../common/remote/addAuthHeader";
-import { nabnakClient } from "../../common/remote/nabnak-client";
 
 const initialState = {
     cardNumber: 0,
     cards: [],
 };
 
-const cardSlice = createSlice({
+const cardPoolSlice = createSlice({
     name: "member",
     initialState,
     reducers: {
@@ -25,6 +23,6 @@ const cardSlice = createSlice({
     },
 });
 
-export default cardSlice.reducer;
+export default cardPoolSlice.reducer;
 
-export const { addCardStore, removeCard, sendCards } = cardSlice.actions;
+export const { addCardStore, removeCard, sendCards } = cardPoolSlice.actions;

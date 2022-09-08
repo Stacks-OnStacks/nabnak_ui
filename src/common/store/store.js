@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
-import cardSlice from "../../components/card/cardSlice";
+import cardPoolSlice from "../../components/dashboard/cardPoolSlice";
 import loginSlice from "../../components/login/loginSlice";
 
-const reducer = combineReducers({ loginSlice, cardSlice });
+const reducer = combineReducers({ loginSlice, cardPoolSlice: cardPoolSlice });
 
 const store = configureStore({ reducer });
 
