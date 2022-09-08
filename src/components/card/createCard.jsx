@@ -10,12 +10,14 @@ export default function CreateCard() {
         tech: "",
         status: "",
     });
+    const [submit, setSubmit] = useState(true);
 
     async function newCard(e) {
         e.preventDefault();
         try {
             addAuthToken();
             await nabnakClient.post("/card", formData);
+            submit ? setSubmit(false) : setSubmit(true);
         } catch (error) {
             console.log(error);
         }
@@ -61,8 +63,6 @@ export default function CreateCard() {
                     <label>Open</label>
                     <input type="radio" id="statusRadio2" name="status" value="INPROGRESS" onChange={formFunctions.status} />
                     <label>In-Progress</label>
-                    <input type="radio" id="statusRadio3" name="status" value="CLOSED" onChange={formFunctions.status} />
-                    <label>Closed</label>
                 </div>
                 <input type="hidden" id="techSelect" class="card" value=""></input>
                 <input type="hidden" id="statusSelect" class="card" value=""></input>

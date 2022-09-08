@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { nabnakClient } from "../../common/remote/nabnak-client";

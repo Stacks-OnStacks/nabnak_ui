@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { nabnakClient } from "../../common/remote/nabnak-client";
 import CardTableData from "./cardTableData";
 

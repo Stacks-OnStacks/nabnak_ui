@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { cardContext } from "./cardTable";
 
-export default function CardTableData(props) {
+export default function CardTableData() {
     const [cards] = useContext(cardContext);
     const cardArray = cards.map((o) => {
         return (
