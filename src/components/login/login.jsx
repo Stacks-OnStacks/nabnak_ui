@@ -1,12 +1,16 @@
 import { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { nabnakClient } from "../../common/remote/nabnak-client";
+import { loginStore } from "./loginSlice";
 
 export default function Login() {
     // Define state & hooks at the beginning
     const navigate = useNavigate();
     const emailInput = useRef();
     const passwordInput = useRef();
+
+    const dispatch = useDispatch();
 
     const [loginStatus, setLoginStatus] = useState(); // use state default value is undefined
 
@@ -22,6 +26,7 @@ export default function Login() {
             setLoginStatus(undefined);
 
             window.localStorage.setItem("token", response.headers.authorization);
+            dispatch(loginStore(response.data));
             navigate("/card");
         } catch (error) {
             console.log(error.response.data);

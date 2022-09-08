@@ -10,8 +10,8 @@ export default function CardTable() {
     // one more hook - useEffect - this causes a side effect whenever a page is render or a state variable is changed
     useEffect(() => {
         console.log("effect invoked");
-        findAll();
-    }, []); // the empty array indicates to only render this side effect when the page is first loaded
+        showTable && findAll();
+    }, [showTable]); // the empty array indicates to only render this side effect when the page is first loaded
 
     async function findAll() {
         try {

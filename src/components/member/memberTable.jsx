@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import AuthCheck from "../../common/authCheck/authCheck";
 import { nabnakClient } from "../../common/remote/nabnak-client";
 import MemberTableData from "./memberTableData";
 
 export default function MemberTable() {
+    AuthCheck(true);
+
     const [members, setMembers] = useState();
     const [showTable, setShowTable] = useState(true);
     // one more hook - useEffect - this causes a side effect whenever a page is render or a state variable is changed

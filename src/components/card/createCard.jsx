@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import AuthCheck from "../../common/authCheck/authCheck";
 import addAuthToken from "../../common/remote/addAuthHeader";
 import { nabnakClient } from "../../common/remote/nabnak-client";
 import CardTable from "./cardTable";
 
 export default function CreateCard() {
+    AuthCheck(false);
+
     const [formData, setFormData] = useState({
         description: "",
         points: 3,

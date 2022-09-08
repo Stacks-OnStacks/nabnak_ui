@@ -53,7 +53,9 @@ export default function Register() {
                     placeholder="Enter 0-100"
                     onChange={(e) => setFormData({ ...formData, experienceMonths: e.target.value })}
                 />
-                <button onClick={register}>Register</button>
+                <button onClick={register} on>
+                    Register
+                </button>
             </form>
             {wasPersisted === undefined ? <p></p> : <p>{wasPersisted}</p>}
         </>
