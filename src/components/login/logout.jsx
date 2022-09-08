@@ -6,6 +6,7 @@ export default function Logout() {
     const dispatch = useDispatch();
 
     function logout() {
+        window.localStorage.removeItem("token");
         dispatch(logoutStore());
     }
     return (

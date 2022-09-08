@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AuthCheck from "../../common/authCheck/authCheck";
+import addAuthToken from "../../common/remote/addAuthHeader";
+import { nabnakClient } from "../../common/remote/nabnak-client";
 import AddCardToPool from "./addCardToPool";
 import { sendCards } from "./cardSlice";
 
 export default function CreateCardPool() {
     AuthCheck(false);
 
-    const dispatch = useDispatch();
+    const cards = useSelector((state) => state.cardSlice.cards);
 
     const [formData, setFormData] = useState({
         description: "",
@@ -21,8 +23,14 @@ export default function CreateCardPool() {
         e.preventDefault();
     }
 
-    function submitCards() {
-        dispatch(sendCards);
+    async function submitCards() {
+        try {
+            addAuthToken();
+            const response = await nabnakClient.post("/card/multi", cards);
+            console.log(response.data);
+        } catch (error) {
+            console.log(error.response.data);
+        }
     }
 
     const formFunctions = {

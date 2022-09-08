@@ -22,16 +22,6 @@ const cardSlice = createSlice({
             }
             state.cardNumber--;
         },
-        async asendCards(state) {
-            // eventually some endpoint
-            // try {
-            //     addAuthToken();
-            //     const response = await nabnakClient.post("/multi", state.cards);
-            //     console.log(response.data);
-            // } catch (error) {
-            //     console.log(error);
-            // }
-        },
     },
 });
 

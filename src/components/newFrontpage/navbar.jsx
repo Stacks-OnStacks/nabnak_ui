@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Logout from "../login/logout";
@@ -8,29 +9,29 @@ export default function Navbar() {
     return (
         <nav>
             <Link to="/">
-                <button>Home Page</button>
+                <Button>Home Page</Button>
             </Link>
             <Link to="/register">
-                <button>Register</button>
+                <Button>Register</Button>
             </Link>
             <Link to="/login">
-                <button>Login</button>
+                <Button>Login</Button>
             </Link>
 
             {email === "guest" || (
                 <>
                     <Link to="/card">
-                        <button>Cards</button>
+                        <Button>Cards</Button>
                     </Link>
                     <Link to="/dashboard">
-                        <button>Dashboard</button>
+                        <Button>Dashboard</Button>
                     </Link>
                 </>
             )}
 
             {admin && (
                 <Link to="/member">
-                    <button>Members</button>
+                    <Button>Members</Button>
                 </Link>
             )}
             <Logout />
