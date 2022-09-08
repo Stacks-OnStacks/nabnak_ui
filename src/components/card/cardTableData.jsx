@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { useSelector } from "react-redux";
+import AddCardToPool from "./addCardToPool";
 import { cardContext } from "./cardTable";
 import DeleteCard from "./deleteCard";
 
@@ -16,6 +17,7 @@ export default function CardTableData() {
                     <td>{o.tech}</td>
                     <td>{o.status}</td>
                     <td>{o.memberEmail}</td>
+                    <AddCardToPool card={{ description: o.description, points: o.points, tech: o.tech, status: o.status }} />
                     <DeleteCard id={o.cardId} />
                 </tr>
             );
