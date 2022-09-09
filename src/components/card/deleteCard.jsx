@@ -1,6 +1,7 @@
 import { useState } from "react";
 import addAuthToken from "../../common/remote/addAuthHeader";
 import { nabnakClient } from "../../common/remote/nabnak-client";
+import { Button } from "@mui/material";
 
 export default function DeleteCard(props) {
     const cardId = props.id;
@@ -18,7 +19,9 @@ export default function DeleteCard(props) {
 
     return (
         <>
-            <button onClick={deleteCard}>Delete</button>
+            <Button variant="contained" onClick={deleteCard}>
+                Delete
+            </Button>
             {deleted === undefined ? <></> : <span>{deleted}</span>}
         </>
     );

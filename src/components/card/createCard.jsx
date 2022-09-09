@@ -1,30 +1,50 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import AuthCheck from "../../common/authCheck/authCheck";
 import addAuthToken from "../../common/remote/addAuthHeader";
 import { nabnakClient } from "../../common/remote/nabnak-client";
 import CardTable from "./cardTable";
+import {
+    Button,
+    FormControl,
+    FormControlLabel,
+    FormLabel,
+    Radio,
+    RadioGroup,
+    Slider,
+    TextareaAutosize,
+    TextField,
+    Typography,
+} from "@mui/material";
+import { Box, height } from "@mui/system";
+import { creationRenderContext } from "./cardHome";
 
 export default function CreateCard() {
     AuthCheck(false);
 
+    const [creation, setCreation] = useContext(creationRenderContext);
+
     const [formData, setFormData] = useState({
         description: "",
         points: 3,
-        tech: "",
-        status: "",
+        tech: "PYTHON",
+        status: "OPEN",
     });
     const [submit, setSubmit] = useState(true);
 
     async function newCard(e) {
         e.preventDefault();
+
+        console.log(formData);
         try {
             addAuthToken();
-            await nabnakClient.post("/card", formData);
+            const response = await nabnakClient.post("/card", formData);
             submit ? setSubmit(false) : setSubmit(true);
+            setCreation(`Card has been successfully added ${formData.description}`);
         } catch (error) {
             console.log(error);
+            setCreation(`Card has failed due to ${error.response.data}`);
         }
     }
 
@@ -45,36 +65,57 @@ export default function CreateCard() {
 
     return (
         <>
-            <form>
-                <label>Description:</label>
-                <textarea class="card" placeholder="i.e Keep your sanity" onChange={formFunctions.description} />
-                <br />
-                <label>Points: {formData.points}</label>
-                <input id="pointsInput" class="card" type="range" min="1" max="5" value={formData.points} onChange={formFunctions.points} />
-                <br />
+            <Box
+                component="form"
+                sx={{
+                    "& .MuiTextField-root": { m: 1, width: "25ch" },
+                }}
+                m={2}
+                pb={4}
+                noValidate
+                autoComplete="off"
+                textAlign="center"
+            >
+                <FormControl>
+                    <Typography textAlign="left">Points: {formData.points}</Typography>
+                    <Slider
+                        defaultValue={3}
+                        style={{ width: 150 }}
+                        valueLabelDisplay="auto"
+                        min={1}
+                        max={5}
+                        onChange={formFunctions.points}
+                    ></Slider>
 
-                <div>
-                    <label>Tech:</label>
-                    <input type="radio" id="techRadio1" name="tech" value="PYTHON" onChange={formFunctions.tech} />
-                    <label>Python</label>
-                    <input type="radio" id="techRadio2" name="tech" value="JAVA" onChange={formFunctions.tech} />
-                    <label>Java</label>
-                    <input type="radio" id="techRadio3" name="tech" value="JAVASCRIPT" onChange={formFunctions.tech} />
-                    <label>JavaScript</label>
-                </div>
-                <div>
-                    <label>Status:</label>
-                    <input type="radio" id="statusRadio1" name="status" value="OPEN" onChange={formFunctions.status} />
-                    <label>Open</label>
-                    <input type="radio" id="statusRadio2" name="status" value="INPROGRESS" onChange={formFunctions.status} />
-                    <label>In-Progress</label>
-                </div>
-                <input type="hidden" id="techSelect" class="card" value=""></input>
-                <input type="hidden" id="statusSelect" class="card" value=""></input>
+                    <Typography textAlign="left">Description</Typography>
+                    <TextareaAutosize
+                        placeholder="i.e Keep your sanity"
+                        maxRows={4}
+                        aria-label="maximum height"
+                        style={{ width: 300, height: 100 }}
+                        onChange={formFunctions.description}
+                    ></TextareaAutosize>
 
-                <button onClick={newCard}>Create Card</button>
-            </form>
-            <CardTable></CardTable>
+                    <RadioGroup row aria-labelledby="demo-radio-buttons-group-label" defaultValue="PYTHON" name="radio-buttons-group">
+                        <Typography m={2} sx={{ height: 10 }}>
+                            Tech:
+                        </Typography>
+                        <FormControlLabel value="PYTHON" label="Python" control={<Radio />} onChange={formFunctions.tech} />
+                        <FormControlLabel value="JAVA" label="Java" control={<Radio />} onChange={formFunctions.tech} />
+                        <FormControlLabel value="JAVASCRIPT" label="JavaScript" control={<Radio />} onChange={formFunctions.tech} />
+                    </RadioGroup>
+
+                    <RadioGroup row aria-labelledby="demo-radio-buttons-group-label" defaultValue="OPEN" name="radio-buttons-group">
+                        <Typography m={2}>Status:</Typography>
+                        <FormControlLabel value="OPEN" label="Open" control={<Radio />} onChange={formFunctions.status} />
+                        <FormControlLabel value="INPROGRESS" label="In-Progress" control={<Radio />} onChange={formFunctions.status} />
+                    </RadioGroup>
+
+                    <Button variant="contained" onClick={newCard}>
+                        Create Card
+                    </Button>
+                </FormControl>
+            </Box>
         </>
     );
 }

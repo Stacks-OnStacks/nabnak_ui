@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { addCardStore } from "./cardPoolSlice";
+import { Button } from "@mui/material";
 
 export default function AddCardToPool(props) {
     const card = props.card;
@@ -10,5 +11,9 @@ export default function AddCardToPool(props) {
         dispatch(addCardStore(card));
     }
 
-    return <button onClick={addToPool}>Add to Pool</button>;
+    return (
+        <Button variant="contained" onClick={addToPool}>
+            Add to Pool
+        </Button>
+    );
 }

@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { logoutStore } from "./loginSlice";
+import { MenuItem, Typography } from "@mui/material";
 
 export default function Logout() {
     const email = useSelector((state) => state.loginSlice.email);
@@ -10,9 +11,8 @@ export default function Logout() {
         dispatch(logoutStore());
     }
     return (
-        <div style={{ float: "right" }}>
-            <span>{email}</span>
-            <button onClick={logout}>Logout</button>
-        </div>
+        <MenuItem onClick={logout}>
+            <Typography>Logout</Typography>
+        </MenuItem>
     );
 }

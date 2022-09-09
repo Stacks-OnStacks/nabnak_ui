@@ -5,6 +5,8 @@ import addAuthToken from "../../common/remote/addAuthHeader";
 import { nabnakClient } from "../../common/remote/nabnak-client";
 import AddCardToPool from "./addCardToPool";
 import { sendCards } from "./cardPoolSlice";
+import { Button, FormControl, FormControlLabel, Radio, RadioGroup, Slide, Slider, TextareaAutosize, Typography } from "@mui/material";
+import { Box } from "@mui/system";
 
 export default function CreateCardPool() {
     AuthCheck(false);
@@ -50,36 +52,57 @@ export default function CreateCardPool() {
 
     return (
         <>
-            <form onSubmit={defaultSub}>
-                <label>Description:</label>
-                <textarea class="card" placeholder="i.e Keep your sanity" onChange={formFunctions.description} />
-                <br />
-                <label>Points: {formData.points}</label>
-                <input id="pointsInput" class="card" type="range" min="1" max="5" value={formData.points} onChange={formFunctions.points} />
-                <br />
+            <Box
+                component="form"
+                sx={{
+                    "& .MuiTextField-root": { m: 1, width: "25ch" },
+                }}
+                m={2}
+                pb={4}
+                noValidate
+                autoComplete="off"
+                textAlign="center"
+            >
+                <FormControl>
+                    <Typography textAlign="left">Points: {formData.points}</Typography>
+                    <Slider
+                        defaultValue={3}
+                        style={{ width: 150 }}
+                        valueLabelDisplay="auto"
+                        min={1}
+                        max={5}
+                        onChange={formFunctions.points}
+                    ></Slider>
 
-                <div>
-                    <label>Tech:</label>
-                    <input type="radio" id="techRadio1" name="tech" value="PYTHON" onChange={formFunctions.tech} />
-                    <label>Python</label>
-                    <input type="radio" id="techRadio2" name="tech" value="JAVA" onChange={formFunctions.tech} />
-                    <label>Java</label>
-                    <input type="radio" id="techRadio3" name="tech" value="JAVASCRIPT" onChange={formFunctions.tech} />
-                    <label>JavaScript</label>
-                </div>
-                <div>
-                    <label>Status:</label>
-                    <input type="radio" id="statusRadio1" name="status" value="OPEN" onChange={formFunctions.status} />
-                    <label>Open</label>
-                    <input type="radio" id="statusRadio2" name="status" value="INPROGRESS" onChange={formFunctions.status} />
-                    <label>In-Progress</label>
-                </div>
-                <input type="hidden" id="techSelect" class="card" value=""></input>
-                <input type="hidden" id="statusSelect" class="card" value=""></input>
+                    <Typography textAlign="left">Description</Typography>
+                    <TextareaAutosize
+                        placeholder="i.e Keep your sanity"
+                        maxRows={4}
+                        aria-label="maximum height"
+                        style={{ width: 300, height: 100 }}
+                        onChange={formFunctions.description}
+                    ></TextareaAutosize>
 
-                <AddCardToPool card={formData} />
-            </form>
-            <button onClick={submitCards}>Send Pool</button>
+                    <RadioGroup row aria-labelledby="demo-radio-buttons-group-label" defaultValue="PYTHON" name="radio-buttons-group">
+                        <Typography m={2} sx={{ height: 10 }}>
+                            Tech:
+                        </Typography>
+                        <FormControlLabel value="PYTHON" label="Python" control={<Radio />} onChange={formFunctions.tech} />
+                        <FormControlLabel value="JAVA" label="Java" control={<Radio />} onChange={formFunctions.tech} />
+                        <FormControlLabel value="JAVASCRIPT" label="JavaScript" control={<Radio />} onChange={formFunctions.tech} />
+                    </RadioGroup>
+
+                    <RadioGroup row aria-labelledby="demo-radio-buttons-group-label" defaultValue="OPEN" name="radio-buttons-group">
+                        <Typography m={2}>Status:</Typography>
+                        <FormControlLabel value="OPEN" label="Open" control={<Radio />} onChange={formFunctions.status} />
+                        <FormControlLabel value="INPROGRESS" label="In-Progress" control={<Radio />} onChange={formFunctions.status} />
+                    </RadioGroup>
+
+                    <Button variant="contained" onClick={submitCards}>
+                        Send Pool
+                    </Button>
+                </FormControl>
+            </Box>
         </>
     );
 }

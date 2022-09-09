@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { removeCard } from "./cardPoolSlice";
+import { Button } from "@mui/material";
 
 export default function DeleteCardFromPool(props) {
     const cardId = props.id;
@@ -14,7 +15,9 @@ export default function DeleteCardFromPool(props) {
 
     return (
         <>
-            <button onClick={deleteCard}>Delete</button>
+            <Button variant="contained" onClick={deleteCard}>
+                Delete
+            </Button>
             {deleted === undefined ? <></> : <span>{deleted}</span>}
         </>
     );

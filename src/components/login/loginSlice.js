@@ -4,6 +4,7 @@ const initialState = {
     admin: false,
     email: "guest",
     id: null,
+    avatar: undefined,
 };
 
 const loginSlice = createSlice({
@@ -11,19 +12,17 @@ const loginSlice = createSlice({
     initialState,
     reducers: {
         loginStore(state, action) {
-            const { email, admin, id } = action.payload;
-            console.log(email, admin, id);
+            const { email, admin, id, avatar } = action.payload;
             state.email = email;
             state.admin = admin;
             state.id = id;
-
-            console.log(state);
+            state.avatar = avatar;
         },
         logoutStore(state) {
             state.email = initialState.email;
             state.admin = initialState.admin;
-            state.id = initialState.id;
-            console.log(state);
+            state.id = 1;
+            state.avatar = undefined;
         },
     },
 });

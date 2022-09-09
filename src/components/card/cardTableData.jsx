@@ -1,3 +1,4 @@
+import { TableBody, TableCell, TableRow } from "@mui/material";
 import { useContext } from "react";
 import { useSelector } from "react-redux";
 import AddCardToPool from "../dashboard/addCardToPool";
@@ -11,17 +12,19 @@ export default function CardTableData() {
         .filter((c) => c.memberEmail === email && c)
         .map((o) => {
             return (
-                <tr key={o.cardId}>
-                    <td>{o.description}</td>
-                    <td>{o.points}</td>
-                    <td>{o.tech}</td>
-                    <td>{o.status}</td>
-                    <td>{o.memberEmail}</td>
-                    <AddCardToPool card={{ description: o.description, points: o.points, tech: o.tech, status: o.status }} />
-                    <DeleteCard id={o.cardId} />
-                </tr>
+                <TableRow key={o.cardId}>
+                    <TableCell align="left">{o.description}</TableCell>
+                    <TableCell align="left">{o.points}</TableCell>
+                    <TableCell align="left">{o.tech}</TableCell>
+                    <TableCell align="left">{o.status}</TableCell>
+                    <TableCell align="left">{o.memberEmail}</TableCell>
+                    <TableCell align="center">
+                        <AddCardToPool card={{ description: o.description, points: o.points, tech: o.tech, status: o.status }} />
+                        <DeleteCard id={o.cardId} />
+                    </TableCell>
+                </TableRow>
             );
         });
 
-    return <tbody>{cardArray}</tbody>;
+    return <TableBody>{cardArray}</TableBody>;
 }
