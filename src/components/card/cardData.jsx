@@ -8,10 +8,11 @@ import Avatar from "./avatar";
 import { cardContext } from "./cards";
 import DeleteCard from "./deleteCard";
 
-export default function CardTableData() {
+export default function CardTableData(props) {
     const [cards] = useContext(cardContext);
     const email = useSelector((state) => state.loginSlice.email);
-    const cardArray = cards.map((o) => {
+
+    function renderCard(o) {
         return (
             <Grid item md={3}>
                 <Card sx={{ maxWidth: 275, display: "flex", minHeight: 325 }} variant="outlined">
@@ -40,7 +41,24 @@ export default function CardTableData() {
                 </Card>
             </Grid>
         );
-    });
+    }
+
+    let cardArray;
+    if (props.filter === true) {
+        console.log("hi");
+        cardArray = cards
+            .filter((c) => c.memberEmail === email && c)
+            .map((o) => {
+                return renderCard(o);
+            });
+    } else {
+        console.log("no");
+
+        cardArray = cards.map((o) => {
+            return renderCard(o);
+        });
+    }
+    console.log(cardArray);
 
     return cardArray;
 }
