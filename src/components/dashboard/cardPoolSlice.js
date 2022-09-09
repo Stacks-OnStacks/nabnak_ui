@@ -20,9 +20,13 @@ const cardPoolSlice = createSlice({
             }
             state.cardNumber--;
         },
+        clearCards(state) {
+            state.cards = [];
+            state.cardNumber = 0;
+        },
     },
 });
 
 export default cardPoolSlice.reducer;
 
-export const { addCardStore, removeCard, sendCards } = cardPoolSlice.actions;
+export const { addCardStore, removeCard, clearCards } = cardPoolSlice.actions;

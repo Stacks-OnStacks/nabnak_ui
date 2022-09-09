@@ -23,7 +23,6 @@ export default function Login() {
     // define functions
     async function login() {
         const body = { email: emailInput.current.value, password: passwordInput.current.value };
-        console.log(body.password);
 
         try {
             const response = await nabnakClient.post("/auth", body);

@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { addCardStore } from "./cardPoolSlice";
 import { Button } from "@mui/material";
+import { toast } from "material-react-toastify";
 
 export default function AddCardToPool(props) {
     const card = props.card;
@@ -9,11 +10,12 @@ export default function AddCardToPool(props) {
 
     function addToPool() {
         dispatch(addCardStore(card));
+        toast.success("Card sucessfully added");
     }
 
     return (
         <Button variant="contained" onClick={addToPool}>
-            Add to Pool
+            Add2Pool
         </Button>
     );
 }

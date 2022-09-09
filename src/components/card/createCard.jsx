@@ -4,7 +4,6 @@ import { useNavigate } from "react-router";
 import AuthCheck from "../../common/authCheck/authCheck";
 import addAuthToken from "../../common/remote/addAuthHeader";
 import { nabnakClient } from "../../common/remote/nabnak-client";
-import CardTable from "./cardTable";
 import {
     Button,
     FormControl,
@@ -41,7 +40,7 @@ export default function CreateCard() {
             addAuthToken();
             const response = await nabnakClient.post("/card", formData);
             submit ? setSubmit(false) : setSubmit(true);
-            setCreation(`Card has been successfully added ${formData.description}`);
+            setCreation(`Card has been successfully added card ID: ${response.data.cardId}`);
         } catch (error) {
             console.log(error);
             setCreation(`Card has failed due to ${error.response.data}`);

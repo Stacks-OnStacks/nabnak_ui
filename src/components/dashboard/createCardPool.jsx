@@ -4,34 +4,35 @@ import AuthCheck from "../../common/authCheck/authCheck";
 import addAuthToken from "../../common/remote/addAuthHeader";
 import { nabnakClient } from "../../common/remote/nabnak-client";
 import AddCardToPool from "./addCardToPool";
-import { sendCards } from "./cardPoolSlice";
+import { clearCards, sendCards } from "./cardPoolSlice";
 import { Button, FormControl, FormControlLabel, Radio, RadioGroup, Slide, Slider, TextareaAutosize, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { toast } from "material-react-toastify";
 
 export default function CreateCardPool() {
     AuthCheck(false);
 
-    const cards = useSelector((state) => state.cardPoolSlice.cards);
+    const { cards, cardNumber } = useSelector((state) => state.cardPoolSlice);
+    const dispatch = useDispatch();
 
     const [formData, setFormData] = useState({
         description: "",
         points: 3,
-        tech: "",
-        status: "",
+        tech: "PYTHON",
+        status: "OPEN",
     });
-    const [submit, setSubmit] = useState(true);
-
-    function defaultSub(e) {
-        e.preventDefault();
-    }
 
     async function submitCards() {
         try {
             addAuthToken();
             const response = await nabnakClient.post("/card/multi", cards);
             console.log(response.data);
+            toast.success(`Cards successfully persisted ${cardNumber} cards to database. Clearing card pool...`);
+            setTimeout(() => {
+                dispatch(clearCards());
+            }, 1500);
         } catch (error) {
-            console.log(error.response.data);
+            toast.error(error.response.data);
         }
     }
 
@@ -101,6 +102,7 @@ export default function CreateCardPool() {
                     <Button variant="contained" onClick={submitCards}>
                         Send Pool
                     </Button>
+                    <AddCardToPool card={formData} />
                 </FormControl>
             </Box>
         </>
