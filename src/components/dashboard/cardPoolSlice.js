@@ -6,7 +6,7 @@ const initialState = {
 };
 
 const cardPoolSlice = createSlice({
-    name: "member",
+    name: "card_pool",
     initialState,
     reducers: {
         addCardStore(state, action) {

@@ -6,9 +6,8 @@ import DeleteCardFromPool from "./deleteCardFromPool";
 
 export default function CardPoolData(props) {
     const email = useSelector((state) => state.loginSlice.email);
-    const cardArray = props.cards;
 
-    cardArray.forEach((o, i) => {
+    const cardArray = props.cards.map((o, i) => {
         return (
             <Grid item md={3}>
                 <Card sx={{ minWidth: 300, maxWidth: 400, display: "flex", minHeight: 325 }} variant="outlined">
